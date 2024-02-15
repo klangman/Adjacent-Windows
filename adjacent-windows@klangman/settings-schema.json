@@ -1,0 +1,40 @@
+{
+   "keybinding-header": {
+      "type": "header",
+      "description": "Switch focus to adjacent window hotkeys"
+   },
+   "left-key": {
+      "type": "keybinding",
+       "description": "Activating window to the left",
+       "default": "<Alt><Super>Left"
+   },
+   "right-key": {
+      "type": "keybinding",
+       "description": "Activating window to the right",
+       "default": "<Alt><Super>Right"
+   },
+   "up-key": {
+      "type": "keybinding",
+       "description": "Activating window above",
+       "default": "<Alt><Super>Up"
+   },
+   "down-key": {
+      "type": "keybinding",
+       "description": "Activating window below",
+       "default": "<Alt><Super>Down"
+   },
+   "settings-header": {
+      "type": "header",
+      "description": "Other settings"
+   },
+  "include-minimized": {
+    "type": "switch",
+    "default": false,
+    "description": "Allow switching to minimized windows"
+  },
+  "include-other-monitors": {
+    "type": "switch",
+    "default": false,
+    "description": "Allow switching to windows on other monitors"
+  }
+}
