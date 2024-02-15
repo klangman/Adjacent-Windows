@@ -1,5 +1,5 @@
 # Adjacent Windows
-A Cinnamon extension that allow you to define hot keys which will activate the nearest window to the current window on the left, right, top and bottom.
+A Cinnamon extension that allows you to define hot keys which will activate the nearest window to the current window on the left, right, top and bottom.
 
 ![screen shot](adjacent-windows@klangman/screenshot.png)
 
@@ -25,7 +25,7 @@ For the latest development version:
 7. Click on the gears icon to the right of the "Adjacent Windows" entry to open the config window so you can change the hotkeys and other options as desired.
 
 ## Feedback
-Please, if you find any issues or suggestions, feel free to create an issue here on Github. Thanks!
+Please, if you find any issues or have any suggestions, feel free to create an issue here on Github. Thanks!
 
 
 Free Icon: https://www.flaticon.com/free-icon/four-arrows_10696144 Four ways icons created by Laisa Islam Ani
