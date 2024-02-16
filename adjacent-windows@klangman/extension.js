@@ -28,6 +28,17 @@ const Direction = {
   Down: 3
 }
 
+const Activate = {
+   HighestZ: 0,
+   Closest: 1
+}
+
+function isAbove(a, b) {
+   // user_time is the last time the window was interacted with, so the window with the greater user_time is closer to the forground
+   if (a.user_time > b.user_time) return true;
+   return false;
+}
+
 class AdjacentWindows {
    constructor(metaData){
       this.meta = metaData;
@@ -109,30 +120,33 @@ class AdjacentWindows {
          let currentWs = global.screen.get_active_workspace_index();
          let ws = global.screen.get_workspace_by_index(currentWs);
          let windows = ws.list_windows();
+         let allowMinimized = this.settings.getValue("include-minimized");
+         let allowOtherMon  = this.settings.getValue("include-other-monitors");
+         let useClosest     = (this.settings.getValue("next-focus") === Activate.Closest)
          for (let i = 0; i < windows.length; i++) {
             let metaWindow = windows[i];
-            if (metaWindow != focusedWindow &&
-               (this.settings.getValue("include-minimized") || !metaWindow.minimized) &&
-               (this.settings.getValue("include-other-monitors") || focusedMonitor == metaWindow.get_monitor()))
+            if (metaWindow != focusedWindow && Main.isInteresting(metaWindow) &&
+               (allowMinimized || !metaWindow.minimized) &&
+               (allowOtherMon || focusedMonitor == metaWindow.get_monitor()))
             {
                let rec = metaWindow.get_frame_rect();
                if (direction == Direction.Left) {
-                  if (rec.x < focusedRec.x && (!bestWindow || rec.x > bestRec.x)) {
+                  if (rec.x < focusedRec.x && (!bestWindow || (useClosest && rec.x > bestRec.x) || (!useClosest && isAbove(metaWindow, bestWindow)))) {
                      bestWindow = metaWindow;
                      bestRec = rec;
                   }
                } else if (direction == Direction.Right) {
-                  if (rec.x > focusedRec.x && (!bestWindow || rec.x < bestRec.x)) {
+                  if (rec.x+rec.width > focusedRec.x+focusedRec.width && (!bestWindow || (useClosest && rec.x+rec.width < bestRec.x+bestRec.width) || (!useClosest && isAbove(metaWindow, bestWindow)))) {
                      bestWindow = metaWindow;
                      bestRec = rec;
                   }
                } else if (direction == Direction.Up) {
-                  if (rec.y < focusedRec.y && (!bestWindow || rec.y > bestRec.y)) {
+                  if (rec.y < focusedRec.y && (!bestWindow || (useClosest && rec.y > bestRec.y) || (!useClosest && isAbove(metaWindow, bestWindow)))) {
                      bestWindow = metaWindow;
                      bestRec = rec;
                   }
                } else if (direction == Direction.Down) {
-                  if (rec.y > focusedRec.y && (!bestWindow || rec.y < bestRec.y)) {
+                  if (rec.y+rec.height > focusedRec.y+focusedRec.height && (!bestWindow || (useClosest && rec.y+rec.height < bestRec.y+bestRec.height) || (!useClosest && isAbove(metaWindow, bestWindow)))) {
                      bestWindow = metaWindow;
                      bestRec = rec;
                   }

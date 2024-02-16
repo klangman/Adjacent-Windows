@@ -5,22 +5,22 @@
    },
    "left-key": {
       "type": "keybinding",
-       "description": "Activating window to the left",
+       "description": "Activate window to the left",
        "default": "<Alt><Super>Left"
    },
    "right-key": {
       "type": "keybinding",
-       "description": "Activating window to the right",
+       "description": "Activate window to the right",
        "default": "<Alt><Super>Right"
    },
    "up-key": {
       "type": "keybinding",
-       "description": "Activating window above",
+       "description": "Activate window above",
        "default": "<Alt><Super>Up"
    },
    "down-key": {
       "type": "keybinding",
-       "description": "Activating window below",
+       "description": "Activate window below",
        "default": "<Alt><Super>Down"
    },
    "settings-header": {
@@ -36,5 +36,15 @@
     "type": "switch",
     "default": false,
     "description": "Allow switching to windows on other monitors"
+  },
+  "next-focus": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+       "Highest in the z-order": 0,
+       "Closest to the current window": 1
+    },
+    "description": "Active the window that is...",
+    "tooltip": "In the set of windows matching the direction hotkey used, active the window that is ether highest in the z-order (most recently focused) or the window closest to the current window. Activating the closest window might bring a window that is currently completely obscured by another window in to focus, but activating the highest window in the z-order might skip over a visible window that is closer to the current window."
   }
 }
