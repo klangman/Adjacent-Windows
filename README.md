@@ -1,9 +1,9 @@
 # Adjacent Windows
-A Cinnamon extension that allows you to define hot keys which will activate the nearest window to the current window on the left, right, top and bottom.
+A Cinnamon extension that allows you to define hot keys which will activate the nearest window to the current window on the left, right, top and bottom. This means you can change the focused window without using Alt-Tab or grabbing your mouse.
 
 ![screen shot](adjacent-windows@klangman/screenshot.png)
 
-By default the Super+Alt+(arrow-keys) are defined as the hotkeys to move to adjacent windows, but this can be changed in the config.
+By default the Super+Alt+(arrow-keys) are defined as the hotkeys to move to adjacent windows, but this can be changed in the config. If you like, for instance, the Vim key bindings, you could change them to Super+h/j/k/l.
 
 ## Installation
 For the latest development version:
