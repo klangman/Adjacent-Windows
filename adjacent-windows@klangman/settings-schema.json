@@ -1,7 +1,7 @@
 {
    "keybinding-header": {
       "type": "header",
-      "description": "Switch focus to adjacent window hotkeys"
+      "description": "Hotkeys to switch focus relative to the current window"
    },
    "left-key": {
       "type": "keybinding",
@@ -22,6 +22,17 @@
       "type": "keybinding",
        "description": "Activate window below",
        "default": "<Alt><Super>Down"
+   },
+   "under-key": {
+      "type": "keybinding",
+       "description": "Activate window under",
+       "default": "<Alt><Super>KP_Insert",
+       "tooltip": "Switch to the next window in the z-order that is overlapped by the current window. If the key combo is pressed again within 3 sec, the focus will change to the next window beneath the window that originally had the focus during the fist key combo press."
+   },
+   "back-key": {
+      "type": "keybinding",
+       "description": "Undo the focus change",
+       "default": ""
    },
    "settings-header": {
       "type": "header",
