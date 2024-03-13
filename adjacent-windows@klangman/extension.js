@@ -295,28 +295,28 @@ class AdjacentWindows {
                   if (rec.x < focusedRec.x) {
                      windowVisibilityList[idx].overlapping = (rec.y < focusedRec.y+focusedRec.height && rec.y+rec.height > focusedRec.y);
                      windowVisibilityList[idx].rec.width = Math.min(rec.width, focusedRec.x-1-rec.x);
-                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowVisibilityList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
+                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
                      candidateList.push(windowVisibilityList[idx]);
                   }
                } else if (direction == Direction.Right) {
                   if (rec.x+rec.width > focusedRec.x+focusedRec.width) {
                      windowVisibilityList[idx].overlapping = (rec.y < focusedRec.y+focusedRec.height && rec.y+rec.height > focusedRec.y);
                      windowVisibilityList[idx].rec.x = Math.max(rec.x, focusedRec.x+focusedRec.width+1);
-                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowVisibilityList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
+                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
                      candidateList.push(windowVisibilityList[idx]);
                   }
                } else if (direction == Direction.Up) {
                   if (rec.y < focusedRec.y) {
                      windowVisibilityList[idx].overlapping = (rec.x < focusedRec.x+focusedRec.width && rec.x+rec.width > focusedRec.x)
                      windowVisibilityList[idx].rec.height = Math.min(rec.height, focusedRec.y-1-rec.y);
-                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowVisibilityList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
+                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
                      candidateList.push(windowVisibilityList[idx]);
                   }
                } else if (direction == Direction.Down) {
                   if (rec.y+rec.height > focusedRec.y+focusedRec.height) {
                      windowVisibilityList[idx].overlapping = (rec.x < focusedRec.x+focusedRec.width && rec.x+rec.width > focusedRec.x)
                      windowVisibilityList[idx].rec.y = Math.max(rec.y, focusedRec.y+focusedRec.heigth+1);
-                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowVisibilityList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
+                     windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
                      candidateList.push(windowVisibilityList[idx]);
                   }
                }
@@ -408,7 +408,8 @@ class AdjacentWindows {
                }
             }
          }
-         return bestWindow.window;
+         if (bestWindow)
+            return bestWindow.window;
       } else if (candidateList.length == 1){
          return candidateList[0].window;
       }
@@ -421,11 +422,12 @@ class AdjacentWindows {
    // Returns an object with the visibility of the four corners
    getCornerVisibility(window, windowList, /*direction*/ x, x2, y, y2) {
       let cornerVisibility = {topLeft: {x:x,y:y}, topRight: {x:x2,y:y}, bottomLeft: {x:x,y:y2}, bottomRight: {x:x2,y:y2}};
-      for (let i = 0 ; windowList[i] != window ; i++) {
-         let cx = windowList[i].rec.x;
-         let cy = windowList[i].rec.y;
-         let cx2 = windowList[i].rec.x+windowList[i].rec.width;
-         let cy2 = windowList[i].rec.y+windowList[i].rec.height;
+      for (let i = 0 ; windowList[i] != window.window ; i++) {
+         let rec = windowList[i].get_frame_rect();
+         let cx = rec.x;
+         let cy = rec.y;
+         let cx2 = rec.x+rec.width;
+         let cy2 = rec.y+rec.height;
          // Null out corners that are covered
          if (cx <= x && cx2 >= x && cy <= y && cy2 >= y) {
             cornerVisibility.topLeft = null;
@@ -466,11 +468,11 @@ class AdjacentWindows {
             let y2 = rec.y+rec.height;
             let x2 = rec.x+rec.width;
             if (rec.x < fx2 && x2 > focusedRec.x && rec.y < fy2 && y2 > focusedRec.y) {
-               this.lastUnderWindow = focusedWindow;
                if (this.underDelay) {
                   let doIt = GLib.MainContext.default().find_source_by_id(this.underDelay);
                   if (doIt) Mainloop.source_remove(this.underDelay);
                }
+               this.lastUnderWindow = focusedWindow;
                this.underDelay = Mainloop.timeout_add(3000, () => { this.underDelay = null; this.lastUnderWindow = null;  });
                //log( `Window under is: "${metaWindow.get_title()}"` );
                return metaWindow;

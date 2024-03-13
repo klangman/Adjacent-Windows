@@ -47,7 +47,7 @@
        "Closest with a visible corner": 2
     },
     "description": "Activate the window that is...",
-    "tooltip": "In the set of windows matching the direction hotkey used, activate the window that is, the closest to the current window, highest in the z-order (most recently focused) or the closest window with a visible corner. Activating the closest window might activate a window that is currently completely obscured by other windows, but activating the highest window in the z-order might skip over a visible window that is closer to the current window. The Closest window with a visible corner option is a compromise that is designed to be more like what most people would generally expect (I hope)"
+    "tooltip": "When using the Left, Right, Above or Below hotkeys, activate the window that is either, closest to the current window, highest in the z-order (most recently focused) or closest window with a visible corner. Activating the closest window might activate a window that is currently completely obscured by other windows, but activating the highest window in the z-order might skip over visible windows that are closer to the current window. The Closest window with a visible corner option is a compromise that is designed to be more like what most people would generally expect (I hope)"
   },
   "include-minimized": {
     "type": "switch",
