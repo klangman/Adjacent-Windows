@@ -315,7 +315,7 @@ class AdjacentWindows {
                } else if (direction == Direction.Down) {
                   if (rec.y+rec.height > focusedRec.y+focusedRec.height) {
                      windowVisibilityList[idx].overlapping = (rec.x < focusedRec.x+focusedRec.width && rec.x+rec.width > focusedRec.x)
-                     windowVisibilityList[idx].rec.y = Math.max(rec.y, focusedRec.y+focusedRec.heigth+1);
+                     windowVisibilityList[idx].rec.y = Math.max(rec.y, focusedRec.y+focusedRec.height+1);
                      windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x, rec.x+rec.width, rec.y, rec.y+rec.height );
                      candidateList.push(windowVisibilityList[idx]);
                   }
@@ -420,10 +420,13 @@ class AdjacentWindows {
    // The passed in window coordinates exclude any portion of the window that is covered by the focused window
    // Assumes the windowList parm is in z-order with focused window at index 0
    // Returns an object with the visibility of the four corners
-   getCornerVisibility(window, windowList, /*direction*/ x, x2, y, y2) {
+   getCornerVisibility(window, windowList, x, x2, y, y2) {
       let cornerVisibility = {topLeft: {x:x,y:y}, topRight: {x:x2,y:y}, bottomLeft: {x:x,y:y2}, bottomRight: {x:x2,y:y2}};
       for (let i = 0 ; windowList[i] != window.window ; i++) {
-         let rec = windowList[i].get_frame_rect();
+         let metaWindow = windowList[i];
+         if (!Main.isInteresting(metaWindow) || metaWindow.minimized)
+            continue;
+         let rec = metaWindow.get_frame_rect();
          let cx = rec.x;
          let cy = rec.y;
          let cx2 = rec.x+rec.width;
