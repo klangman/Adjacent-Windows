@@ -42,7 +42,7 @@ const STACK_MIN_CAP = 50;    // Minimum stack capacity
 const STACK_RESIZE  = 20;    // How many over capacity before resizing
 
 function isAbove(a, b) {
-   // user_time is the last time the window was interacted with, so the window with the greater user_time is closer to the forground
+   // user_time is the last time the window was interacted with, so the window with the greater user_time is closer to the foreground
    if (a.user_time > b.user_time) return true;
    return false;
 }
@@ -330,7 +330,6 @@ class AdjacentWindows {
          // The 1st entry in the candidate list will be the highest z-order and for sure visible
          let bestWindow = null;
          let bestWindowOffset;
-         //log( `Looking for window closest to focused x ${focusedRec.x}` );
          for (let i=0 ; i < candidateList.length ; i++) {
             let candidate = candidateList[i];
             let visibleCorner = (candidate.cornerVisibility.topLeft || candidate.cornerVisibility.bottomLeft || candidate.cornerVisibility.topRight || candidate.cornerVisibility.bottomRight);
@@ -363,7 +362,7 @@ class AdjacentWindows {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.x+candidate.rec.width;
                      }
-                  } else if (candidate.cornerVisibility.topLeft || candidate.cornerVisibility.bottomLeft) {
+                  } else {
                      if (candidateIsBetter || (candidate.overlapping == bestWindow.overlapping && candidate.rec.x > bestWindowOffset)) {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.x;
@@ -375,7 +374,7 @@ class AdjacentWindows {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.x;
                      }
-                  } else if (candidate.cornerVisibility.topRight || candidate.cornerVisibility.bottomRight) {
+                  } else {
                      if (candidateIsBetter || (candidate.overlapping == bestWindow.overlapping && candidate.rec.x+candidate.rec.width < bestWindowOffset)) {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.x+candidate.rec.width;
@@ -387,7 +386,7 @@ class AdjacentWindows {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.y+candidate.rec.height;
                      }
-                  } else if (candidate.cornerVisibility.topLeft || candidate.cornerVisibility.topRight) {
+                  } else {
                      if (candidateIsBetter || (candidate.overlapping == bestWindow.overlapping && candidate.rec.y > bestWindowOffset)) {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.y;
@@ -399,7 +398,7 @@ class AdjacentWindows {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.y;
                      }
-                  } else if (candidate.cornerVisibility.bottomLeft || candidate.cornerVisibility.bottomRight) {
+                  } else {
                      if (candidateIsBetter || (candidate.overlapping == bestWindow.overlapping && candidate.rec.y+candidate.rec.height < bestWindowOffset)) {
                         bestWindow = candidate;
                         bestWindowOffset = candidate.rec.y+candidate.rec.height;
@@ -460,13 +459,11 @@ class AdjacentWindows {
          focusedRec = focusedWindow.get_frame_rect();
          i = windows.indexOf(focusedWindow);
       }
-      //log( `Looking for window below "${focusedWindow.get_title()}" at i=${i} of ${windows.length}` );
       let fy2 = focusedRec.y+focusedRec.height;
       let fx2 = focusedRec.x+focusedRec.width;
       for ( ; i < windows.length ; i++ ){
          let metaWindow = windows[i];
          if (metaWindow != focusedWindow && Main.isInteresting(metaWindow) && !metaWindow.minimized) {
-            //log( `Checking: "${metaWindow.get_title()}"` );
             let rec = metaWindow.get_frame_rect();
             let y2 = rec.y+rec.height;
             let x2 = rec.x+rec.width;
@@ -477,12 +474,10 @@ class AdjacentWindows {
                }
                this.lastUnderWindow = focusedWindow;
                this.underDelay = Mainloop.timeout_add(3000, () => { this.underDelay = null; this.lastUnderWindow = null;  });
-               //log( `Window under is: "${metaWindow.get_title()}"` );
                return metaWindow;
             }
          }
       }
-      //log( "No under window found!" );
       return null;
    }
 }
