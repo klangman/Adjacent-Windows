@@ -49,6 +49,28 @@
     "description": "Activate the window that is...",
     "tooltip": "When using the Left, Right, Above or Below hotkeys, activate the window that is either:\n- Closest to the current window: this might activate a window that is currently completely obscured by other windows.\n- Highest in the z-order: most recently focused; this might skip over visible windows that are closer to the current window.\n- Closest window with a visible corner: a compromise that is designed to be more like what most people would generally expect (I hope)."
   },
+  "overlap-allowance": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 50,
+    "units": "pixels",
+    "step": 1,
+    "description": "Corner overlap allowance",
+    "tooltip": "Set how many pixels a corner can be obscured by other windows and still be considered a candidate window to receive the focus",
+    "dependency": "next-focus=2"
+  },
+  "boost-restriction": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 85,
+    "units": "percent",
+    "step": 1,
+    "description": "Reduce current window adjacent preference zone by",
+    "tooltip": "Reduces the size of the preference zone that is adjacent to the current window. Candidate windows within the zone are given preference over windows outside the zone. Reducing this area (by increasing this percentage) means the selected candidate is more likely to occupy the same area as the current window in the desired direction. Max 85%",
+    "dependency": "next-focus=2"
+  },
   "include-minimized": {
     "type": "switch",
     "default": false,

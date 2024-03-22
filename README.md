@@ -1,5 +1,5 @@
 # Adjacent Windows
-A Cinnamon extension that allows you to define hot keys which will activate the nearest window to the current window on the left, right, top and bottom. This means you can change the focused window without using Alt-Tab or grabbing your mouse.
+A Cinnamon extension that allows you to define hot keys which will activate the nearest window to the current window on the left, right, top, bottom or underneath. There is also an option (disabled by default) to undo the window change and activate the previous window. This means you can change the focused window without using Alt-Tab or grabbing your mouse.
 
 ![screen shot](adjacent-windows@klangman/screenshot.png)
 
