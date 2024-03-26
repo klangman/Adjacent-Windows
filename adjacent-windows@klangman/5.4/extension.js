@@ -298,7 +298,7 @@ class AdjacentWindows {
                   if (rec.x < focusedRec.x) {
                      windowVisibilityList[idx].overlapping = (rec.y < focusedRec.y+focusedRec.height-zoneReduction && rec.y+rec.height > focusedRec.y+zoneReduction);
                      rec.width = Math.min(rec.width, focusedRec.x-1-rec.x);
-                     if (rec.width > cornerAllowance && rec.height > cornerAllowance) {
+                     if (rec.width >= cornerAllowance && rec.height >= cornerAllowance) {
                         windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x+cornerAllowance, rec.x+rec.width-cornerAllowance, rec.y+cornerAllowance, rec.y+rec.height-cornerAllowance );
                         candidateList.push(windowVisibilityList[idx]);
                      }
@@ -309,7 +309,7 @@ class AdjacentWindows {
                      let x2 = rec.x+rec.width;
                      rec.x = Math.max(rec.x, focusedRec.x+focusedRec.width+1);
                      rec.width = x2 - rec.x;
-                     if (rec.width > cornerAllowance && rec.height > cornerAllowance) {
+                     if (rec.width >= cornerAllowance && rec.height >= cornerAllowance) {
                         windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x+cornerAllowance, rec.x+rec.width-cornerAllowance, rec.y+cornerAllowance, rec.y+rec.height-cornerAllowance );
                         candidateList.push(windowVisibilityList[idx]);
                      }
@@ -318,7 +318,7 @@ class AdjacentWindows {
                   if (rec.y < focusedRec.y) {
                      windowVisibilityList[idx].overlapping = (rec.x < focusedRec.x+focusedRec.width-zoneReduction && rec.x+rec.width > focusedRec.x+zoneReduction)
                      rec.height = Math.min(rec.height, focusedRec.y-1-rec.y);
-                     if (rec.width > cornerAllowance && rec.height > cornerAllowance) {
+                     if (rec.width >= cornerAllowance && rec.height >= cornerAllowance) {
                         windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x+cornerAllowance, rec.x+rec.width-cornerAllowance, rec.y+cornerAllowance, rec.y+rec.height-cornerAllowance );
                         candidateList.push(windowVisibilityList[idx]);
                      }
@@ -329,7 +329,7 @@ class AdjacentWindows {
                      let y2 = rec.y+rec.height;
                      rec.y = Math.max(rec.y, focusedRec.y+focusedRec.height+1);
                      rec.height = y2 - rec.y;
-                     if (rec.width > cornerAllowance && rec.height > cornerAllowance) {
+                     if (rec.width >= cornerAllowance && rec.height >= cornerAllowance) {
                         windowVisibilityList[idx].cornerVisibility = this.getCornerVisibility( windowVisibilityList[idx], windowList, rec.x+cornerAllowance, rec.x+rec.width-cornerAllowance, rec.y+cornerAllowance, rec.y+rec.height-cornerAllowance );
                         candidateList.push(windowVisibilityList[idx]);
                      }

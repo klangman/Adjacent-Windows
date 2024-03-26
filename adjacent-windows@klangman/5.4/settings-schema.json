@@ -56,8 +56,8 @@
     "max": 50,
     "units": "pixels",
     "step": 1,
-    "description": "Corner overlap allowance",
-    "tooltip": "Set how many pixels a corner can be obscured by other windows and still be considered a candidate window to receive the focus",
+    "description": "Corner overlap allowance / minimum visibility",
+    "tooltip": "Sets how many pixels a corner can be obscured by other windows and still be considered a candidate window. Also sets the minimum amount of window visibility in order to qualify as a candidate window",
     "dependency": "next-focus=2"
   },
   "boost-restriction": {
@@ -65,10 +65,10 @@
     "default": 0,
     "min": 0,
     "max": 85,
-    "units": "percent",
+    "units": "priority",
     "step": 1,
-    "description": "Reduce current window adjacent preference zone by",
-    "tooltip": "Reduces the size of the preference zone that is adjacent to the current window. Candidate windows within the zone are given preference over windows outside the zone. Reducing this area (by increasing this percentage) means the selected candidate is more likely to occupy the same area as the current window in the desired direction. Max 85%",
+    "description": "Increase the priority of direction alignment",
+    "tooltip": "Increasing this setting gives more priority to windows that occupy the same area as the current window in the desired direction, and less priority to widows that are at an offset but closer. Max 85%",
     "dependency": "next-focus=2"
   },
   "include-minimized": {
