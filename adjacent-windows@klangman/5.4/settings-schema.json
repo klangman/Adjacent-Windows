@@ -71,6 +71,12 @@
     "tooltip": "Increasing this setting gives more priority to windows that occupy the same area as the current window in the desired direction, and less priority to widows that are at an offset but closer. Max 85%",
     "dependency": "next-focus=2"
   },
+  "under-pointer": {
+    "type": "switch",
+    "default": false,
+    "description": "The \"activate window under\" hotkey is relative to the mouse pointer",
+    "tooltip": "When enabled, the \"activate window under\" hotkey uses the mouse pointer location to determine the set of candidate windows. When disabled, the candidate windows will be those that overlap with the current window"
+  },
   "include-minimized": {
     "type": "switch",
     "default": false,
@@ -81,5 +87,16 @@
     "type": "switch",
     "default": false,
     "description": "Allow switching to windows on other monitors"
+  },
+  "warp-cursor-pointer": {
+    "type": "switch",
+    "default": false,
+    "description": "Warp the cursor to the center of the focused window"
+  },
+  "enable-wrap-around": {
+    "type": "switch",
+    "default": false,
+    "description": "Wrap around to the opposite side when no window is found",
+    "tooltip": "When enabled, if there is no window in the selected direction, focus will wrap around to the window on the opposite side of the screen (e.g., pressing left with no windows to the left will focus the rightmost window)"
   }
 }
